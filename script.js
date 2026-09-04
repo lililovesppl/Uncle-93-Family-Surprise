@@ -325,42 +325,42 @@ document.addEventListener("DOMContentLoaded", () => {
     const videos = {
 
         "birthday-food": {
-            file: "videos/birthday-food.mp4",
+            file: "birthday-food.mp4",
             title: "Birthday Food",
             description:
                 "Good food, family and a reason to celebrate."
         },
 
         "everyone-dancing": {
-            file: "videos/everyone-dancing.mp4",
+            file: "everyone-dancing.mp4",
             title: "Everyone Dancing",
             description:
                 "When the family celebration turns into a dance floor."
         },
 
         "before-birthday-celebration": {
-            file: "videos/before-birthday-celebration.mp4",
+            file: "before-birthday-celebration.mp4",
             title: "Before the Birthday Celebration",
             description:
                 "A celebration before the actual birthday."
         },
 
         "calling-uncle-after-eating-1": {
-            file: "videos/calling-uncle-after-eating-1.mp4",
+            file: "calling-uncle-after-eating-1.mp4",
             title: "Calling Uncle After Eating",
             description:
                 "Everyone calls Uncle after finishing the food."
         },
 
         "calling-uncle-after-eating-2": {
-            file: "videos/calling-uncle-after-eating-2.mp4",
+            file: "calling-uncle-after-eating-2.mp4",
             title: "The Call Continues",
             description:
                 "The family call continues."
         },
 
         "cousins-green-light": {
-            file: "videos/cousins-green-light.mp4",
+            file: "cousins-green-light.mp4",
             title: "Uncle's Green Light",
             description:
                 "Sometimes the best family memories start with someone saying, Go ahead."
