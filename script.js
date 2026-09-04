@@ -367,133 +367,133 @@ document.addEventListener("DOMContentLoaded", () => {
         },
 
         "lylie": {
-            file: "videos/lylie.mp4",
+            file: "lylie.mp4",
             title: "Lylie",
             description:
                 "A little birthday greeting from Lylie."
         },
 
         "akeisha-jenny-son": {
-            file: "videos/akeisha-jenny-son.mp4",
+            file: "akeisha-jenny-son.mp4",
             title: "Akeisha & Jenny's Son",
             description:
                 "A birthday song made especially for Uncle."
         },
 
         "ethan": {
-            file: "videos/ethan.mp4",
+            file: "ethan.mp4",
             title: "Ethan",
             description:
                 "A birthday message from Ethan."
         },
 
         "pau-ashley-camille": {
-            file: "videos/pau-ashley-camille.mp4",
+            file: "pau-ashley-camille.mp4",
             title: "Pau, Ashley & Camille",
             description:
                 "A birthday greeting filled with laughter."
         },
 
         "metseng-tony": {
-            file: "videos/metseng-tony.mp4",
+            file: "metseng-tony.mp4",
             title: "Metseng & Tony",
             description:
                 "A birthday greeting from the family."
         },
 
         "paullene": {
-            file: "videos/paullene.mp4",
+            file: "paullene.mp4",
             title: "Paullene",
             description:
                 "A birthday message from Paullene."
         },
 
         "raquel": {
-            file: "videos/raquel.mp4",
+            file: "raquel.mp4",
             title: "Raquel",
             description:
                 "A birthday greeting from Raquel."
         },
 
         "janet": {
-            file: "videos/janet.mp4",
+            file: "janet.mp4",
             title: "Janet",
             description:
                 "A birthday message from Janet."
         },
 
         "jenny": {
-            file: "videos/jenny.mp4",
+            file: "jenny.mp4",
             title: "Jenny",
             description:
                 "A birthday greeting from Jenny."
         },
 
         "jesyl": {
-            file: "videos/jesyl.mp4",
+            file: "jesyl.mp4",
             title: "Jesyl",
             description:
                 "A birthday message from Jesyl."
         },
 
         "dianne": {
-            file: "videos/dianne.mp4",
+            file: "dianne.mp4",
             title: "Dianne",
             description:
                 "A birthday greeting from Dianne."
         },
 
         "grace-camille-puti": {
-            file: "videos/grace-camille-puti.mp4",
+            file: "grace-camille-puti.mp4",
             title: "Grace, Camille & Puti",
             description:
                 "A family birthday greeting."
         },
 
         "dinand": {
-            file: "videos/dinand.mp4",
+            file: "dinand.mp4",
             title: "Dinand",
             description:
                 "A birthday greeting from Dinand."
         },
 
         "glenda": {
-            file: "videos/glenda.mp4",
+            file: "glenda.mp4",
             title: "Glenda",
             description:
                 "A birthday message from Glenda."
         },
 
         "akeisha-dance": {
-            file: "videos/akeisha-dance.mp4",
+            file: "akeisha-dance.mp4",
             title: "Akeisha",
             description:
                 "A special birthday dance for Uncle."
         },
 
         "vilma-santy": {
-            file: "videos/vilma-santy.mp4",
+            file: "vilma-santy.mp4",
             title: "Vilma & Santy",
             description:
                 "A birthday greeting from Vilma and Santy."
         },
 
         "nica": {
-            file: "videos/nica.mp4",
+            file: "nica.mp4",
             title: "Nica",
             description:
                 "A birthday message from Nica."
         },
 
         "aj": {
-            file: "videos/aj.mp4",
+            file: "aj.mp4",
             title: "AJ",
             description:
                 "A birthday greeting from AJ."
         },
 
         "pauldhess-wife-son": {
-            file: "videos/pauldhess-wife-son.mp4",
+            file: "pauldhess-wife-son.mp4",
             title: "Pauldhess, Wife & Son",
             description:
                 "A birthday greeting from the family."
