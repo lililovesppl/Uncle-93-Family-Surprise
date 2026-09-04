@@ -1,834 +1,412 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-    /* =====================================
-       LOADING
-    ===================================== */
+    /* =========================================
+       VIDEO DATA
+       All videos are in the ROOT folder
+       ========================================= */
 
-    const loadingMessages = [
-        "Organizing family memories...",
-        "Finding old stories...",
-        "Collecting birthday greetings...",
-        "Checking the family archive...",
-        "Preparing something special...",
-        "Almost ready..."
-    ];
+    const videoData = {
 
-    const loadingBar = document.getElementById("loadingBar");
-    const loadingText = document.getElementById("loadingText");
-    const loadingPercent = document.getElementById("loadingPercent");
+        // FAMILY GREETINGS
+        "lylie": {
+            name: "Lylie",
+            file: "lylie.mp4",
+            message: "A sweet birthday greeting from Lylie."
+        },
 
-    let progress = 0;
-    let messageIndex = 0;
+        "akeisha-jenny-son": {
+            name: "Akiesha and Jenny's Son",
+            file: "akeisha-jenny-son.mp4",
+            message: "A special birthday greeting from Akiesha and Jenny's son."
+        },
 
-    const loadingInterval = setInterval(() => {
+        "ethan": {
+            name: "Ethan",
+            file: "ethan.mp4",
+            message: "A birthday greeting from Ethan, son of Nico."
+        },
 
-        progress += 2;
+        "pau-ashley-camille": {
+            name: "Pau, Ashley and Camille",
+            file: "pau-ashley-camille.mp4",
+            message: "A fun family birthday greeting filled with laughter."
+        },
 
-        if (loadingBar) {
-            loadingBar.style.width = progress + "%";
+        "metseng-tony": {
+            name: "Metseng and Tony",
+            file: "metseng-tony.mp4",
+            message: "A special birthday greeting from Metseng and Tony."
+        },
+
+        "paullene": {
+            name: "Paullene",
+            file: "paullene.mp4",
+            message: "A birthday greeting from Paullene."
+        },
+
+        "raquel": {
+            name: "Raquel",
+            file: "raquel.mp4",
+            message: "A special birthday greeting from Raquel."
+        },
+
+        "janet": {
+            name: "Janet",
+            file: "janet.mp4",
+            message: "A birthday greeting from Janet."
+        },
+
+        "jenny": {
+            name: "Jenny",
+            file: "jenny.mp4",
+            message: "A birthday greeting from Jenny."
+        },
+
+        "jesyl": {
+            name: "Jesyl",
+            file: "jesyl.mp4",
+            message: "A special birthday greeting from Jesyl."
+        },
+
+        "dianne": {
+            name: "Dianne",
+            file: "dianne.mp4",
+            message: "A birthday greeting from Dianne."
+        },
+
+        "grace-camille-puti": {
+            name: "Grace, Camille and Puti",
+            file: "grace-camille-puti.mp4",
+            message: "A special family birthday greeting."
+        },
+
+        "dinand": {
+            name: "Dinand",
+            file: "dinand.mp4",
+            message: "A birthday greeting from Dinand."
+        },
+
+        "glenda": {
+            name: "Glenda",
+            file: "glenda.mp4",
+            message: "A birthday greeting from Glenda."
+        },
+
+        "akeisha-dance": {
+            name: "Akiesha's Dance",
+            file: "akeisha-dance.mp4",
+            message: "A special dance for Uncle."
+        },
+
+        "vilma-santy": {
+            name: "Vilma and Santy",
+            file: "vilma-santy.mp4",
+            message: "A birthday greeting from Vilma and Santy."
+        },
+
+        "nica": {
+            name: "Nica",
+            file: "nica.mp4",
+            message: "A birthday greeting from Nica."
+        },
+
+        "aj": {
+            name: "AJ",
+            file: "aj.mp4",
+            message: "A special birthday greeting from AJ."
+        },
+
+        "pauldhess-wife-son": {
+            name: "Pauldhess, Wife and Son",
+            file: "pauldhess-wife-son.mp4",
+            message: "A special birthday greeting from the family."
+        },
+
+
+        /* =========================================
+           CELEBRATION VIDEOS
+           ========================================= */
+
+        "birthday-food": {
+            name: "Birthday Celebration",
+            file: "birthday-food.mp4",
+            message: "A little glimpse of the food and celebration prepared for Uncle's 93rd birthday."
+        },
+
+        "everyone-dancing": {
+            name: "Everyone Dancing",
+            file: "everyone-dancing.mp4",
+            message: "Everyone enjoying the celebration together."
+        },
+
+        "before-birthday-celebration": {
+            name: "Before the Birthday",
+            file: "before-birthday-celebration.mp4",
+            message: "A special moment before Uncle's actual birthday celebration."
+        },
+
+        "calling-uncle-after-eating-1": {
+            name: "Calling Uncle After Eating",
+            file: "calling-uncle-after-eating-1.mp4",
+            message: "After eating, everyone called Uncle."
+        },
+
+        "calling-uncle-after-eating-2": {
+            name: "Calling Uncle After Eating — Part 2",
+            file: "calling-uncle-after-eating-2.mp4",
+            message: "The family call continues."
+        },
+
+        "cousins-green-light": {
+            name: "Uncle's Green Light",
+            file: "cousins-green-light.mp4",
+            message: "Sometimes, the best family memories start with one person saying, 'Go ahead!' Uncle supported our cousins' bonding, and this is one of the memories we made together."
+        }
+    };
+
+
+    /* =========================================
+       GET ELEMENTS
+       ========================================= */
+
+    const videoModal = document.getElementById("videoModal");
+    const modalVideo = document.getElementById("modalVideo");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalMessage = document.getElementById("modalMessage");
+
+    const secretModal = document.getElementById("secretModal");
+    const finalSurprise = document.getElementById("finalSurprise");
+
+
+    /* =========================================
+       OPEN VIDEO
+       ========================================= */
+
+    window.openVideo = function(key) {
+
+        const video = videoData[key];
+
+        if (!video) {
+            console.error("Video not found:", key);
+            return;
         }
 
-        if (loadingPercent) {
-            loadingPercent.textContent = progress + "%";
+        console.log("Opening video:", video.file);
+
+        // Stop previous video
+        modalVideo.pause();
+        modalVideo.removeAttribute("src");
+        modalVideo.load();
+
+        // Update modal information
+        modalTitle.textContent = video.name;
+        modalMessage.textContent = video.message;
+
+        // Set new video
+        modalVideo.src = video.file;
+        modalVideo.load();
+
+        // Show modal
+        videoModal.classList.add("active");
+        document.body.style.overflow = "hidden";
+
+        // Try to play
+        const playPromise = modalVideo.play();
+
+        if (playPromise !== undefined) {
+            playPromise.catch(error => {
+                console.log("Autoplay prevented. User can press play.", error);
+            });
         }
 
-        if (
-            progress % 18 === 0 &&
-            messageIndex < loadingMessages.length - 1
-        ) {
-            messageIndex++;
+        playClick();
+        createConfetti();
+    };
 
-            if (loadingText) {
-                loadingText.textContent =
-                    loadingMessages[messageIndex];
+
+    /* =========================================
+       CLOSE VIDEO
+       ========================================= */
+
+    window.closeVideo = function() {
+
+        if (!videoModal) return;
+
+        modalVideo.pause();
+        modalVideo.removeAttribute("src");
+        modalVideo.load();
+
+        videoModal.classList.remove("active");
+
+        document.body.style.overflow = "";
+    };
+
+
+    /* =========================================
+       CLOSE WHEN CLICKING OUTSIDE MODAL
+       ========================================= */
+
+    if (videoModal) {
+
+        videoModal.addEventListener("click", function(event) {
+
+            if (event.target === videoModal) {
+                closeVideo();
             }
-        }
 
-        if (progress >= 100) {
-
-            clearInterval(loadingInterval);
-
-            setTimeout(() => {
-
-                const intro = document.getElementById("intro");
-                const errorScreen =
-                    document.getElementById("errorScreen");
-
-                if (intro) {
-                    intro.classList.add("hidden");
-                }
-
-                if (errorScreen) {
-                    errorScreen.classList.remove("hidden");
-                }
-
-                playSound("error");
-
-            }, 500);
-        }
-
-    }, 60);
-
-
-    /* =====================================
-       SOUND EFFECTS
-    ===================================== */
-
-    let audioContext = null;
-
-    function getAudioContext() {
-
-        if (!audioContext) {
-            audioContext =
-                new (window.AudioContext ||
-                    window.webkitAudioContext)();
-        }
-
-        return audioContext;
+        });
     }
 
 
-    function playTone(
-        frequency,
-        duration,
-        type = "square",
-        volume = 0.04
-    ) {
+    /* =========================================
+       ESC KEY
+       ========================================= */
+
+    document.addEventListener("keydown", function(event) {
+
+        if (event.key === "Escape") {
+
+            closeVideo();
+
+            if (secretModal) {
+                secretModal.classList.remove("active");
+            }
+
+        }
+
+    });
+
+
+    /* =========================================
+       VIDEO ERROR DETECTION
+       ========================================= */
+
+    if (modalVideo) {
+
+        modalVideo.addEventListener("error", function() {
+
+            console.error("VIDEO ERROR");
+            console.error("File:", modalVideo.src);
+            console.error("Error:", modalVideo.error);
+
+        });
+
+    }
+
+
+    /* =========================================
+       VIDEO LOADED
+       ========================================= */
+
+    if (modalVideo) {
+
+        modalVideo.addEventListener("loadeddata", function() {
+
+            console.log("Video successfully loaded:", modalVideo.src);
+
+        });
+
+    }
+
+
+    /* =========================================
+       CLICK SOUND
+       ========================================= */
+
+    function playClick() {
 
         try {
 
-            const ctx = getAudioContext();
+            const AudioContext =
+                window.AudioContext || window.webkitAudioContext;
 
-            const oscillator =
-                ctx.createOscillator();
+            if (!AudioContext) return;
 
-            const gain =
-                ctx.createGain();
+            const audioContext = new AudioContext();
 
-            oscillator.type = type;
-            oscillator.frequency.value = frequency;
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
 
-            gain.gain.setValueAtTime(
-                volume,
-                ctx.currentTime
+            oscillator.type = "square";
+
+            oscillator.frequency.setValueAtTime(
+                500,
+                audioContext.currentTime
             );
 
-            gain.gain.exponentialRampToValueAtTime(
+            oscillator.frequency.exponentialRampToValueAtTime(
+                900,
+                audioContext.currentTime + 0.08
+            );
+
+            gainNode.gain.setValueAtTime(
+                0.05,
+                audioContext.currentTime
+            );
+
+            gainNode.gain.exponentialRampToValueAtTime(
                 0.001,
-                ctx.currentTime + duration
+                audioContext.currentTime + 0.12
             );
 
-            oscillator.connect(gain);
-            gain.connect(ctx.destination);
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
 
             oscillator.start();
 
             oscillator.stop(
-                ctx.currentTime + duration
+                audioContext.currentTime + 0.12
             );
 
         } catch (error) {
 
-            console.log("Audio unavailable.");
-
-        }
-    }
-
-
-    function playSound(type) {
-
-        if (type === "click") {
-
-            playTone(650, 0.07);
-            setTimeout(() => {
-                playTone(900, 0.08);
-            }, 60);
-
-        }
-
-        if (type === "error") {
-
-            playTone(180, 0.18, "sawtooth", 0.05);
-
-            setTimeout(() => {
-                playTone(120, 0.25, "sawtooth", 0.05);
-            }, 160);
-
-        }
-
-        if (type === "success") {
-
-            playTone(523, 0.1);
-            setTimeout(() => playTone(659, 0.1), 100);
-            setTimeout(() => playTone(784, 0.18), 200);
-
-        }
-
-        if (type === "countdown") {
-
-            playTone(440, 0.12);
+            console.log("Sound unavailable:", error);
 
         }
 
     }
 
 
-    /* =====================================
-       REVEAL
-    ===================================== */
-
-    window.showReveal = function () {
-
-        playSound("click");
-
-        const errorScreen =
-            document.getElementById("errorScreen");
-
-        const revealScreen =
-            document.getElementById("revealScreen");
-
-        if (errorScreen) {
-            errorScreen.classList.add("hidden");
-        }
-
-        if (revealScreen) {
-            revealScreen.classList.remove("hidden");
-        }
-
-    };
-
-
-    /* =====================================
-       COUNTDOWN
-    ===================================== */
-
-    window.startCountdown = function () {
-
-        playSound("success");
-
-        const revealScreen =
-            document.getElementById("revealScreen");
-
-        const countdownScreen =
-            document.getElementById("countdownScreen");
-
-        const number =
-            document.getElementById("countdownNumber");
-
-        if (revealScreen) {
-            revealScreen.classList.add("hidden");
-        }
-
-        if (countdownScreen) {
-            countdownScreen.classList.remove("hidden");
-        }
-
-        let count = 5;
-
-        if (number) {
-            number.textContent = count;
-        }
-
-        const timer = setInterval(() => {
-
-            count--;
-
-            if (number) {
-                number.textContent = count;
-            }
-
-            playSound("countdown");
-
-            if (count <= 0) {
-
-                clearInterval(timer);
-
-                setTimeout(() => {
-
-                    if (countdownScreen) {
-                        countdownScreen.classList.add("hidden");
-                    }
-
-                    const mainWebsite =
-                        document.getElementById("mainWebsite");
-
-                    if (mainWebsite) {
-                        mainWebsite.classList.remove("hidden");
-                    }
-
-                    window.scrollTo({
-                        top: 0,
-                        behavior: "smooth"
-                    });
-
-                    launchConfetti();
-
-                }, 500);
-            }
-
-        }, 900);
-
-    };
-
-
-    /* =====================================
-       SCROLL
-    ===================================== */
-
-    window.scrollToSection = function (id) {
-
-        playSound("click");
-
-        const section =
-            document.getElementById(id);
-
-        if (!section) return;
-
-        section.scrollIntoView({
-            behavior: "smooth"
-        });
-
-        launchConfetti(20);
-
-    };
-
-
-    /* =====================================
-       SECRET MESSAGE
-    ===================================== */
-
-    window.showSecretMessage = function () {
-
-        playSound("success");
-
-        const secret =
-            document.getElementById("secretMessage");
-
-        if (!secret) return;
-
-        secret.classList.remove("hidden");
-
-        secret.scrollIntoView({
-            behavior: "smooth",
-            block: "center"
-        });
-
-        launchConfetti(80);
-
-    };
-
-
-    /* =====================================
-       VIDEO DATABASE
-    ===================================== */
-
-    const videos = {
-
-        "birthday-food": {
-            file: "birthday-food.mp4",
-            title: "Birthday Food",
-            description:
-                "Good food, family and a reason to celebrate."
-        },
-
-        "everyone-dancing": {
-            file: "everyone-dancing.mp4",
-            title: "Everyone Dancing",
-            description:
-                "When the family celebration turns into a dance floor."
-        },
-
-        "before-birthday-celebration": {
-            file: "before-birthday-celebration.mp4",
-            title: "Before the Birthday Celebration",
-            description:
-                "A celebration before the actual birthday."
-        },
-
-        "calling-uncle-after-eating-1": {
-            file: "calling-uncle-after-eating-1.mp4",
-            title: "Calling Uncle After Eating",
-            description:
-                "Everyone calls Uncle after finishing the food."
-        },
-
-        "calling-uncle-after-eating-2": {
-            file: "calling-uncle-after-eating-2.mp4",
-            title: "The Call Continues",
-            description:
-                "The family call continues."
-        },
-
-        "cousins-green-light": {
-            file: "cousins-green-light.mp4",
-            title: "Uncle's Green Light",
-            description:
-                "Sometimes the best family memories start with someone saying, Go ahead."
-        },
-
-        "lylie": {
-            file: "lylie.mp4",
-            title: "Lylie",
-            description:
-                "A little birthday greeting from Lylie."
-        },
-
-        "akeisha-jenny-son": {
-            file: "akeisha-jenny-son.mp4",
-            title: "Akeisha & Jenny's Son",
-            description:
-                "A birthday song made especially for Uncle."
-        },
-
-        "ethan": {
-            file: "ethan.mp4",
-            title: "Ethan",
-            description:
-                "A birthday message from Ethan."
-        },
-
-        "pau-ashley-camille": {
-            file: "pau-ashley-camille.mp4",
-            title: "Pau, Ashley & Camille",
-            description:
-                "A birthday greeting filled with laughter."
-        },
-
-        "metseng-tony": {
-            file: "metseng-tony.mp4",
-            title: "Metseng & Tony",
-            description:
-                "A birthday greeting from the family."
-        },
-
-        "paullene": {
-            file: "paullene.mp4",
-            title: "Paullene",
-            description:
-                "A birthday message from Paullene."
-        },
-
-        "raquel": {
-            file: "raquel.mp4",
-            title: "Raquel",
-            description:
-                "A birthday greeting from Raquel."
-        },
-
-        "janet": {
-            file: "janet.mp4",
-            title: "Janet",
-            description:
-                "A birthday message from Janet."
-        },
-
-        "jenny": {
-            file: "jenny.mp4",
-            title: "Jenny",
-            description:
-                "A birthday greeting from Jenny."
-        },
-
-        "jesyl": {
-            file: "jesyl.mp4",
-            title: "Jesyl",
-            description:
-                "A birthday message from Jesyl."
-        },
-
-        "dianne": {
-            file: "dianne.mp4",
-            title: "Dianne",
-            description:
-                "A birthday greeting from Dianne."
-        },
-
-        "grace-camille-puti": {
-            file: "grace-camille-puti.mp4",
-            title: "Grace, Camille & Puti",
-            description:
-                "A family birthday greeting."
-        },
-
-        "dinand": {
-            file: "dinand.mp4",
-            title: "Dinand",
-            description:
-                "A birthday greeting from Dinand."
-        },
-
-        "glenda": {
-            file: "glenda.mp4",
-            title: "Glenda",
-            description:
-                "A birthday message from Glenda."
-        },
-
-        "akeisha-dance": {
-            file: "akeisha-dance.mp4",
-            title: "Akeisha",
-            description:
-                "A special birthday dance for Uncle."
-        },
-
-        "vilma-santy": {
-            file: "vilma-santy.mp4",
-            title: "Vilma & Santy",
-            description:
-                "A birthday greeting from Vilma and Santy."
-        },
-
-        "nica": {
-            file: "nica.mp4",
-            title: "Nica",
-            description:
-                "A birthday message from Nica."
-        },
-
-        "aj": {
-            file: "aj.mp4",
-            title: "AJ",
-            description:
-                "A birthday greeting from AJ."
-        },
-
-        "pauldhess-wife-son": {
-            file: "pauldhess-wife-son.mp4",
-            title: "Pauldhess, Wife & Son",
-            description:
-                "A birthday greeting from the family."
-        }
-
-    };
-
-
-    /* =====================================
-       OPEN VIDEO
-    ===================================== */
-
-    window.openVideo = function (videoId) {
-
-        const video = videos[videoId];
-
-        if (!video) {
-            console.error(
-                "Video not found:",
-                videoId
-            );
-            return;
-        }
-
-        playSound("success");
-        launchConfetti(45);
-
-        const modal =
-            document.getElementById("videoModal");
-
-        const modalVideo =
-            document.getElementById("modalVideo");
-
-        const modalTitle =
-            document.getElementById("modalTitle");
-
-        const modalDescription =
-            document.getElementById("modalDescription");
-
-        if (!modal ||
-            !modalVideo ||
-            !modalTitle ||
-            !modalDescription) {
-            return;
-        }
-
-        modalTitle.textContent =
-            video.title;
-
-        modalDescription.textContent =
-            video.description;
-
-        modalVideo.src =
-            video.file;
-
-        modal.classList.remove("hidden");
-
-        document.body.style.overflow =
-            "hidden";
-
-        modalVideo.load();
-
-        modalVideo.play().catch(() => {});
-
-    };
-
-
-    /* =====================================
-       CLOSE VIDEO
-    ===================================== */
-
-    window.closeVideo = function () {
-
-        playSound("click");
-
-        const modal =
-            document.getElementById("videoModal");
-
-        const modalVideo =
-            document.getElementById("modalVideo");
-
-        if (modalVideo) {
-
-            modalVideo.pause();
-
-            modalVideo.currentTime = 0;
-
-            modalVideo.removeAttribute("src");
-
-            modalVideo.load();
-        }
-
-        if (modal) {
-            modal.classList.add("hidden");
-        }
-
-        document.body.style.overflow = "";
-
-    };
-
-
-    /* =====================================
-       CLICK OUTSIDE VIDEO
-    ===================================== */
-
-    const videoModal =
-        document.getElementById("videoModal");
-
-    if (videoModal) {
-
-        videoModal.addEventListener(
-            "click",
-            function(event) {
-
-                if (event.target === videoModal) {
-                    closeVideo();
-                }
-
-            }
-        );
-
-    }
-
-
-    /* =====================================
-       ESCAPE KEY
-    ===================================== */
-
-    document.addEventListener(
-        "keydown",
-        function(event) {
-
-            if (event.key === "Escape") {
-                closeVideo();
-            }
-
-        }
-    );
-
-
-    /* =====================================
-       FINAL SURPRISE
-    ===================================== */
-
-    window.unlockFinalSurprise = function () {
-
-        playSound("success");
-
-        launchConfetti(180);
-
-        const section =
-            document.getElementById("lastSurprise");
-
-        if (!section) return;
-
-        section.classList.remove("hidden");
-
-        setTimeout(() => {
-
-            section.scrollIntoView({
-                behavior: "smooth"
-            });
-
-        }, 100);
-
-    };
-
-
-    /* =====================================
-       PERSONAL GIFT
-    ===================================== */
-
-    window.openPersonalGift = function () {
-
-        playSound("success");
-
-        launchConfetti(200);
-
-        /*
-            REPLACE THE URL BELOW
-            WITH YOUR PERSONAL BIRTHDAY WEBSITE.
-        */
-
-        const personalWebsite =
-            "#";
-
-        if (personalWebsite !== "#") {
-
-            window.open(
-                personalWebsite,
-                "_blank"
-            );
-
-        } else {
-
-            alert(
-                "Your personal surprise website link will be added here."
-            );
-
-        }
-
-    };
-
-
-    /* =====================================
-       CLOSE SURPRISE
-    ===================================== */
-
-    window.closeSurprise = function () {
-
-        playSound("click");
-
-        const section =
-            document.getElementById("lastSurprise");
-
-        if (!section) return;
-
-        section.classList.add("hidden");
-
-        window.scrollTo({
-            top: document.body.scrollHeight,
-            behavior: "smooth"
-        });
-
-    };
-
-
-    /* =====================================
+    /* =========================================
        CONFETTI
-    ===================================== */
+       ========================================= */
 
-    const canvas =
-        document.getElementById("confettiCanvas");
+    function createConfetti() {
 
-    const ctx =
-        canvas ? canvas.getContext("2d") : null;
-
-    let confettiPieces = [];
-
-    function resizeCanvas() {
+        const canvas = document.getElementById("confettiCanvas");
 
         if (!canvas) return;
 
-        canvas.width =
-            window.innerWidth;
+        const ctx = canvas.getContext("2d");
 
-        canvas.height =
-            window.innerHeight;
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
 
-    }
+        const pieces = [];
 
-    resizeCanvas();
+        for (let i = 0; i < 80; i++) {
 
-    window.addEventListener(
-        "resize",
-        resizeCanvas
-    );
+            pieces.push({
 
-
-    function launchConfetti(amount = 100) {
-
-        if (!canvas || !ctx) return;
-
-        const colors = [
-            "#ff159f",
-            "#00e5ff",
-            "#ffe600",
-            "#ffffff",
-            "#8a5cff"
-        ];
-
-        for (let i = 0; i < amount; i++) {
-
-            confettiPieces.push({
-
-                x: Math.random() *
-                    canvas.width,
+                x: Math.random() * canvas.width,
 
                 y: -20,
 
-                size:
-                    Math.random() * 8 + 4,
+                size: Math.random() * 8 + 4,
 
-                speed:
-                    Math.random() * 4 + 2,
+                speed: Math.random() * 4 + 2,
 
-                drift:
-                    Math.random() * 2 - 1,
+                rotation: Math.random() * 360,
 
-                rotation:
-                    Math.random() * 360,
-
-                rotationSpeed:
-                    Math.random() * 8 - 4,
-
-                color:
-                    colors[
-                        Math.floor(
-                            Math.random() *
-                            colors.length
-                        )
-                    ]
+                rotationSpeed: Math.random() * 10 - 5
 
             });
 
         }
 
-        if (confettiPieces.length > 500) {
+        let animationFrame;
 
-            confettiPieces =
-                confettiPieces.slice(-500);
-
-        }
-
-        animateConfetti();
-
-    }
-
-
-    let animationRunning = false;
-
-    function animateConfetti() {
-
-        if (animationRunning) return;
-
-        animationRunning = true;
-
-        function frame() {
-
-            if (!ctx || !canvas) {
-
-                animationRunning = false;
-                return;
-
-            }
+        function animate() {
 
             ctx.clearRect(
                 0,
@@ -837,22 +415,17 @@ document.addEventListener("DOMContentLoaded", () => {
                 canvas.height
             );
 
-            confettiPieces =
-                confettiPieces.filter(
-                    piece =>
-                        piece.y <
-                        canvas.height + 30
-                );
+            let activePieces = 0;
 
-            confettiPieces.forEach(
-                piece => {
+            pieces.forEach(piece => {
+
+                if (piece.y < canvas.height + 20) {
+
+                    activePieces++;
 
                     piece.y += piece.speed;
 
-                    piece.x += piece.drift;
-
-                    piece.rotation +=
-                        piece.rotationSpeed;
+                    piece.rotation += piece.rotationSpeed;
 
                     ctx.save();
 
@@ -862,63 +435,286 @@ document.addEventListener("DOMContentLoaded", () => {
                     );
 
                     ctx.rotate(
-                        piece.rotation *
-                        Math.PI / 180
+                        piece.rotation * Math.PI / 180
                     );
-
-                    ctx.fillStyle =
-                        piece.color;
 
                     ctx.fillRect(
                         -piece.size / 2,
                         -piece.size / 2,
                         piece.size,
-                        piece.size * 1.8
+                        piece.size
                     );
 
                     ctx.restore();
 
                 }
-            );
 
-            if (confettiPieces.length > 0) {
+            });
 
-                requestAnimationFrame(frame);
+            if (activePieces > 0) {
+
+                animationFrame =
+                    requestAnimationFrame(animate);
 
             } else {
 
-                animationRunning = false;
+                ctx.clearRect(
+                    0,
+                    0,
+                    canvas.width,
+                    canvas.height
+                );
 
             }
 
         }
 
-        requestAnimationFrame(frame);
+        cancelAnimationFrame(animationFrame);
+
+        animate();
 
     }
 
 
-    /* =====================================
-       ALL BUTTONS GET SOUND
-    ===================================== */
+    /* =========================================
+       SECRET MESSAGE
+       ========================================= */
 
-    document.addEventListener(
-        "click",
-        function(event) {
+    window.openSecret = function() {
 
-            const button =
-                event.target.closest("button");
+        if (!secretModal) return;
 
-            if (!button) return;
+        secretModal.classList.add("active");
 
-            if (
-                button.hasAttribute("onclick")
-            ) {
-                playSound("click");
+        document.body.style.overflow = "hidden";
+
+        playClick();
+        createConfetti();
+
+    };
+
+
+    window.closeSecret = function() {
+
+        if (!secretModal) return;
+
+        secretModal.classList.remove("active");
+
+        document.body.style.overflow = "";
+
+    };
+
+
+    /* =========================================
+       FINAL SURPRISE
+       ========================================= */
+
+    window.showFinalSurprise = function() {
+
+        if (!finalSurprise) return;
+
+        finalSurprise.classList.add("active");
+
+        playClick();
+        createConfetti();
+
+    };
+
+
+    /* =========================================
+       PAGE LOADING EFFECT
+       ========================================= */
+
+    const loadingScreen =
+        document.getElementById("loadingScreen");
+
+    const loadingProgress =
+        document.getElementById("loadingProgress");
+
+    if (loadingScreen) {
+
+        let progress = 0;
+
+        const loadingInterval = setInterval(() => {
+
+            progress += Math.floor(
+                Math.random() * 12
+            ) + 5;
+
+            if (progress >= 100) {
+
+                progress = 100;
+
+                clearInterval(loadingInterval);
+
+                setTimeout(() => {
+
+                    loadingScreen.classList.add("hidden");
+
+                }, 500);
+
             }
+
+            if (loadingProgress) {
+
+                loadingProgress.style.width =
+                    progress + "%";
+
+            }
+
+        }, 150);
+
+    }
+
+
+    /* =========================================
+       FAKE SYSTEM ERROR
+       ========================================= */
+
+    const errorScreen =
+        document.getElementById("errorScreen");
+
+    const revealScreen =
+        document.getElementById("revealScreen");
+
+    const startButton =
+        document.getElementById("startButton");
+
+    if (startButton) {
+
+        startButton.addEventListener(
+            "click",
+            function() {
+
+                if (errorScreen) {
+
+                    errorScreen.classList.add("active");
+
+                }
+
+                playClick();
+
+            }
+        );
+
+    }
+
+
+    /* =========================================
+       REVEAL BUTTON
+       ========================================= */
+
+    const revealButton =
+        document.getElementById("revealButton");
+
+    if (revealButton) {
+
+        revealButton.addEventListener(
+            "click",
+            function() {
+
+                if (errorScreen) {
+
+                    errorScreen.classList.remove("active");
+
+                }
+
+                if (revealScreen) {
+
+                    revealScreen.classList.add("active");
+
+                }
+
+                playClick();
+                createConfetti();
+
+            }
+        );
+
+    }
+
+
+    /* =========================================
+       COUNTDOWN
+       ========================================= */
+
+    const countdown =
+        document.getElementById("countdown");
+
+    const mainContent =
+        document.getElementById("mainContent");
+
+    if (countdown) {
+
+        let number = 5;
+
+        const countdownInterval =
+            setInterval(() => {
+
+                countdown.textContent = number;
+
+                playClick();
+
+                number--;
+
+                if (number < 0) {
+
+                    clearInterval(
+                        countdownInterval
+                    );
+
+                    countdown.style.display =
+                        "none";
+
+                    if (mainContent) {
+
+                        mainContent.classList.add(
+                            "active"
+                        );
+
+                    }
+
+                    createConfetti();
+
+                }
+
+            }, 1000);
+
+    }
+
+
+    /* =========================================
+       WINDOW RESIZE
+       ========================================= */
+
+    window.addEventListener(
+        "resize",
+        function() {
+
+            const canvas =
+                document.getElementById(
+                    "confettiCanvas"
+                );
+
+            if (!canvas) return;
+
+            canvas.width =
+                window.innerWidth;
+
+            canvas.height =
+                window.innerHeight;
 
         }
     );
 
+
+    console.log(
+        "Uncle 93 Family Surprise loaded successfully."
+    );
+
+    console.log(
+        "Total videos:",
+        Object.keys(videoData).length
+    );
 
 });
