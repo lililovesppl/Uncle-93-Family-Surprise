@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {
+function initializeBirthdayWebsite() {
 
     /* =====================================
        LOADING
@@ -20,9 +20,13 @@ document.addEventListener("DOMContentLoaded", () => {
     let progress = 0;
     let messageIndex = 0;
 
-    const loadingInterval = setInterval(() => {
+    function updateLoading() {
 
         progress += 2;
+
+        if (progress > 100) {
+            progress = 100;
+        }
 
         if (loadingBar) {
             loadingBar.style.width = progress + "%";
@@ -32,11 +36,15 @@ document.addEventListener("DOMContentLoaded", () => {
             loadingPercent.textContent = progress + "%";
         }
 
-        if (
-            progress % 18 === 0 &&
-            messageIndex < loadingMessages.length - 1
-        ) {
-            messageIndex++;
+        const newMessageIndex =
+            Math.min(
+                Math.floor(progress / 17),
+                loadingMessages.length - 1
+            );
+
+        if (newMessageIndex !== messageIndex) {
+
+            messageIndex = newMessageIndex;
 
             if (loadingText) {
                 loadingText.textContent =
@@ -50,7 +58,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
             setTimeout(() => {
 
-                const intro = document.getElementById("intro");
+                const intro =
+                    document.getElementById("intro");
+
                 const errorScreen =
                     document.getElementById("errorScreen");
 
@@ -64,10 +74,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 playSound("error");
 
-            }, 500);
+            }, 700);
         }
+    }
 
-    }, 60);
+    const loadingInterval =
+        setInterval(updateLoading, 60);
 
 
     /* =====================================
@@ -79,9 +91,12 @@ document.addEventListener("DOMContentLoaded", () => {
     function getAudioContext() {
 
         if (!audioContext) {
+
             audioContext =
-                new (window.AudioContext ||
-                    window.webkitAudioContext)();
+                new (
+                    window.AudioContext ||
+                    window.webkitAudioContext
+                )();
         }
 
         return audioContext;
@@ -97,7 +112,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
         try {
 
-            const ctx = getAudioContext();
+            const ctx =
+                getAudioContext();
+
+            if (ctx.state === "suspended") {
+                ctx.resume();
+            }
 
             const oscillator =
                 ctx.createOscillator();
@@ -106,7 +126,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 ctx.createGain();
 
             oscillator.type = type;
-            oscillator.frequency.value = frequency;
+
+            oscillator.frequency.value =
+                frequency;
 
             gain.gain.setValueAtTime(
                 volume,
@@ -119,6 +141,7 @@ document.addEventListener("DOMContentLoaded", () => {
             );
 
             oscillator.connect(gain);
+
             gain.connect(ctx.destination);
 
             oscillator.start();
@@ -144,8 +167,8 @@ document.addEventListener("DOMContentLoaded", () => {
             setTimeout(() => {
                 playTone(900, 0.08);
             }, 60);
-
         }
+
 
         if (type === "error") {
 
@@ -157,15 +180,17 @@ document.addEventListener("DOMContentLoaded", () => {
             );
 
             setTimeout(() => {
+
                 playTone(
                     120,
                     0.25,
                     "sawtooth",
                     0.05
                 );
-            }, 160);
 
+            }, 160);
         }
+
 
         if (type === "success") {
 
@@ -178,15 +203,13 @@ document.addEventListener("DOMContentLoaded", () => {
             setTimeout(() => {
                 playTone(784, 0.18);
             }, 200);
-
         }
+
 
         if (type === "countdown") {
 
             playTone(440, 0.12);
-
         }
-
     }
 
 
@@ -212,6 +235,7 @@ document.addEventListener("DOMContentLoaded", () => {
             revealScreen.classList.remove("hidden");
         }
 
+        launchConfetti(100);
     };
 
 
@@ -246,45 +270,45 @@ document.addEventListener("DOMContentLoaded", () => {
             number.textContent = count;
         }
 
-        const timer = setInterval(() => {
+        const timer =
+            setInterval(() => {
 
-            count--;
+                count--;
 
-            if (number) {
-                number.textContent = count;
-            }
+                if (number) {
+                    number.textContent = count;
+                }
 
-            playSound("countdown");
+                playSound("countdown");
 
-            if (count <= 0) {
+                if (count <= 0) {
 
-                clearInterval(timer);
+                    clearInterval(timer);
 
-                setTimeout(() => {
+                    setTimeout(() => {
 
-                    if (countdownScreen) {
-                        countdownScreen.classList.add("hidden");
-                    }
+                        if (countdownScreen) {
+                            countdownScreen.classList.add("hidden");
+                        }
 
-                    const mainWebsite =
-                        document.getElementById("mainWebsite");
+                        const mainWebsite =
+                            document.getElementById("mainWebsite");
 
-                    if (mainWebsite) {
-                        mainWebsite.classList.remove("hidden");
-                    }
+                        if (mainWebsite) {
+                            mainWebsite.classList.remove("hidden");
+                        }
 
-                    window.scrollTo({
-                        top: 0,
-                        behavior: "smooth"
-                    });
+                        window.scrollTo({
+                            top: 0,
+                            behavior: "smooth"
+                        });
 
-                    launchConfetti();
+                        launchConfetti(150);
 
-                }, 500);
-            }
+                    }, 500);
+                }
 
-        }, 900);
-
+            }, 900);
     };
 
 
@@ -306,7 +330,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         launchConfetti(20);
-
     };
 
 
@@ -331,7 +354,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         launchConfetti(80);
-
     };
 
 
@@ -526,18 +548,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
     window.openVideo = function (videoId) {
 
-        const video = videos[videoId];
+        const video =
+            videos[videoId];
 
         if (!video) {
+
             console.error(
                 "Video not found:",
                 videoId
             );
+
             return;
         }
-
-        playSound("success");
-        launchConfetti(45);
 
         const modal =
             document.getElementById("videoModal");
@@ -557,11 +579,17 @@ document.addEventListener("DOMContentLoaded", () => {
             !modalTitle ||
             !modalDescription
         ) {
+
             console.error(
                 "Video modal elements are missing."
             );
+
             return;
         }
+
+        playSound("success");
+
+        launchConfetti(45);
 
         modalTitle.textContent =
             video.title;
@@ -569,26 +597,29 @@ document.addEventListener("DOMContentLoaded", () => {
         modalDescription.textContent =
             video.description;
 
-        /*
-         * The videos are in the SAME folder
-         * as index.html, so no "videos/" here.
-         */
+        modalVideo.pause();
 
-        modalVideo.src = video.file;
+        modalVideo.removeAttribute("src");
+
+        modalVideo.load();
+
+        modalVideo.src =
+            video.file;
 
         modal.classList.remove("hidden");
 
-        document.body.style.overflow = "hidden";
+        document.body.style.overflow =
+            "hidden";
 
         modalVideo.load();
 
         modalVideo.play().catch(() => {
-            /*
-             * Some browsers block autoplay.
-             * The video controls will still work.
-             */
-        });
 
+            console.log(
+                "Autoplay blocked. Use the video controls to play."
+            );
+
+        });
     };
 
 
@@ -621,9 +652,32 @@ document.addEventListener("DOMContentLoaded", () => {
             modal.classList.add("hidden");
         }
 
-        document.body.style.overflow = "";
-
+        document.body.style.overflow =
+            "";
     };
+
+
+    /* =====================================
+       VIDEO ERROR CHECK
+    ===================================== */
+
+    const modalVideo =
+        document.getElementById("modalVideo");
+
+    if (modalVideo) {
+
+        modalVideo.addEventListener(
+            "error",
+            function () {
+
+                console.error(
+                    "Unable to load video:",
+                    modalVideo.src
+                );
+
+            }
+        );
+    }
 
 
     /* =====================================
@@ -639,13 +693,15 @@ document.addEventListener("DOMContentLoaded", () => {
             "click",
             function (event) {
 
-                if (event.target === videoModal) {
+                if (
+                    event.target === videoModal
+                ) {
+
                     closeVideo();
                 }
 
             }
         );
-
     }
 
 
@@ -689,7 +745,6 @@ document.addEventListener("DOMContentLoaded", () => {
             });
 
         }, 100);
-
     };
 
 
@@ -704,13 +759,15 @@ document.addEventListener("DOMContentLoaded", () => {
         launchConfetti(200);
 
         /*
-            REPLACE THE URL BELOW
-            WITH YOUR PERSONAL BIRTHDAY WEBSITE.
+            REPLACE "#" WITH YOUR
+            PERSONAL BIRTHDAY WEBSITE URL.
         */
 
         const personalWebsite = "#";
 
-        if (personalWebsite !== "#") {
+        if (
+            personalWebsite !== "#"
+        ) {
 
             window.open(
                 personalWebsite,
@@ -722,9 +779,7 @@ document.addEventListener("DOMContentLoaded", () => {
             alert(
                 "Your personal surprise website link will be added here."
             );
-
         }
-
     };
 
 
@@ -744,10 +799,10 @@ document.addEventListener("DOMContentLoaded", () => {
         section.classList.add("hidden");
 
         window.scrollTo({
-            top: document.body.scrollHeight,
+            top:
+                document.body.scrollHeight,
             behavior: "smooth"
         });
-
     };
 
 
@@ -756,10 +811,14 @@ document.addEventListener("DOMContentLoaded", () => {
     ===================================== */
 
     const canvas =
-        document.getElementById("confettiCanvas");
+        document.getElementById(
+            "confettiCanvas"
+        );
 
     const ctx =
-        canvas ? canvas.getContext("2d") : null;
+        canvas
+            ? canvas.getContext("2d")
+            : null;
 
     let confettiPieces = [];
 
@@ -772,7 +831,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         canvas.height =
             window.innerHeight;
-
     }
 
     resizeCanvas();
@@ -783,7 +841,9 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
 
-    function launchConfetti(amount = 100) {
+    function launchConfetti(
+        amount = 100
+    ) {
 
         if (!canvas || !ctx) return;
 
@@ -795,7 +855,11 @@ document.addEventListener("DOMContentLoaded", () => {
             "#8a5cff"
         ];
 
-        for (let i = 0; i < amount; i++) {
+        for (
+            let i = 0;
+            i < amount;
+            i++
+        ) {
 
             confettiPieces.push({
 
@@ -827,24 +891,27 @@ document.addEventListener("DOMContentLoaded", () => {
                             colors.length
                         )
                     ]
-
             });
-
         }
 
-        if (confettiPieces.length > 500) {
+        if (
+            confettiPieces.length >
+            500
+        ) {
 
             confettiPieces =
-                confettiPieces.slice(-500);
-
+                confettiPieces.slice(
+                    -500
+                );
         }
 
         animateConfetti();
-
     }
 
 
-    let animationRunning = false;
+    let animationRunning =
+        false;
+
 
     function animateConfetti() {
 
@@ -856,9 +923,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (!ctx || !canvas) {
 
-                animationRunning = false;
-                return;
+                animationRunning =
+                    false;
 
+                return;
             }
 
             ctx.clearRect(
@@ -878,9 +946,11 @@ document.addEventListener("DOMContentLoaded", () => {
             confettiPieces.forEach(
                 piece => {
 
-                    piece.y += piece.speed;
+                    piece.y +=
+                        piece.speed;
 
-                    piece.x += piece.drift;
+                    piece.x +=
+                        piece.drift;
 
                     piece.rotation +=
                         piece.rotationSpeed;
@@ -894,7 +964,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     ctx.rotate(
                         piece.rotation *
-                        Math.PI / 180
+                        Math.PI /
+                        180
                     );
 
                     ctx.fillStyle =
@@ -908,24 +979,26 @@ document.addEventListener("DOMContentLoaded", () => {
                     );
 
                     ctx.restore();
-
                 }
             );
 
-            if (confettiPieces.length > 0) {
+            if (
+                confettiPieces.length >
+                0
+            ) {
 
-                requestAnimationFrame(frame);
+                requestAnimationFrame(
+                    frame
+                );
 
             } else {
 
-                animationRunning = false;
-
+                animationRunning =
+                    false;
             }
-
         }
 
         requestAnimationFrame(frame);
-
     }
 
 
@@ -938,17 +1011,45 @@ document.addEventListener("DOMContentLoaded", () => {
         function (event) {
 
             const button =
-                event.target.closest("button");
+                event.target.closest(
+                    "button"
+                );
 
             if (!button) return;
 
             if (
-                button.hasAttribute("onclick")
+                button.hasAttribute(
+                    "onclick"
+                )
             ) {
+
                 playSound("click");
             }
 
         }
     );
 
-});
+}
+
+
+/* =====================================
+   START WEBSITE
+   Works whether DOM is already loaded
+   or still loading.
+===================================== */
+
+if (
+    document.readyState ===
+    "loading"
+) {
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        initializeBirthdayWebsite
+    );
+
+} else {
+
+    initializeBirthdayWebsite();
+
+}
