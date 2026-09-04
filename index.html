@@ -1,0 +1,1211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Uncle's 93rd Birthday | Family Archive</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- ============================= -->
+<!-- CONFETTI -->
+<!-- ============================= -->
+
+<canvas id="confettiCanvas"></canvas>
+
+
+<!-- ============================= -->
+<!-- OPENING / BOOT SCREEN -->
+<!-- ============================= -->
+
+<section id="intro" class="screen active">
+
+    <div class="retro-box">
+
+        <div class="small-label">FAMILY ARCHIVE SYSTEM</div>
+
+        <h1>
+            UNCLE'S<br>
+            <span>93RD</span><br>
+            BIRTHDAY
+        </h1>
+
+        <div class="loading-line">
+            <div id="loadingBar"></div>
+        </div>
+
+        <p id="loadingText">
+            Organizing family memories...
+        </p>
+
+        <div class="loading-percent" id="loadingPercent">
+            0%
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ============================= -->
+<!-- FAKE ERROR -->
+<!-- ============================= -->
+
+<section id="errorScreen" class="screen hidden">
+
+    <div class="error-box">
+
+        <div class="error-code">
+            ERROR 093
+        </div>
+
+        <h2>
+            TOO MANY<br>
+            FAMILY MEMORIES
+        </h2>
+
+        <p>
+            The system has detected an unusually large amount of love,
+            laughter, stories and birthday greetings.
+        </p>
+
+        <button onclick="showReveal()" class="retro-button">
+            TRY AGAIN
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ============================= -->
+<!-- REVEAL -->
+<!-- ============================= -->
+
+<section id="revealScreen" class="screen hidden">
+
+    <div class="reveal-box">
+
+        <p class="small-label">
+            SYSTEM MESSAGE
+        </p>
+
+        <h2>
+            YOU REALLY<br>
+            THOUGHT YOUR<br>
+            NIECE MADE THIS<br>
+            ALONE?
+        </h2>
+
+        <p class="reveal-text">
+            Well...
+        </p>
+
+        <button onclick="startCountdown()" class="retro-button big-button">
+            FIND OUT
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ============================= -->
+<!-- COUNTDOWN -->
+<!-- ============================= -->
+
+<section id="countdownScreen" class="screen hidden">
+
+    <div class="countdown-number" id="countdownNumber">
+        5
+    </div>
+
+    <p class="countdown-text">
+        OPENING THE FAMILY ARCHIVE
+    </p>
+
+</section>
+
+
+<!-- ============================= -->
+<!-- MAIN WEBSITE -->
+<!-- ============================= -->
+
+<main id="mainWebsite" class="hidden">
+
+
+    <!-- ============================= -->
+    <!-- NAVIGATION -->
+    <!-- ============================= -->
+
+    <nav class="retro-nav">
+
+        <button onclick="scrollToSection('home')">
+            HOME
+        </button>
+
+        <button onclick="scrollToSection('celebration')">
+            CELEBRATION
+        </button>
+
+        <button onclick="scrollToSection('greetings')">
+            GREETINGS
+        </button>
+
+        <button onclick="scrollToSection('finalMessage')">
+            FINAL
+        </button>
+
+    </nav>
+
+
+    <!-- ============================= -->
+    <!-- HERO -->
+    <!-- ============================= -->
+
+    <section id="home" class="hero-section">
+
+        <div class="hero-grid">
+
+            <div>
+
+                <div class="small-label">
+                    FAMILY ARCHIVE / 2026
+                </div>
+
+                <h1>
+                    HAPPY<br>
+                    <span>93RD</span><br>
+                    BIRTHDAY
+                </h1>
+
+                <p class="hero-description">
+                    This is not just a birthday greeting.
+                    This is a collection of memories, laughter,
+                    family stories and messages made especially for you.
+                </p>
+
+                <button
+                    class="retro-button"
+                    onclick="scrollToSection('celebration')">
+                    ENTER THE ARCHIVE
+                </button>
+
+            </div>
+
+
+            <div class="hero-card">
+
+                <div class="card-top">
+                    FAMILY FILE
+                </div>
+
+                <div class="big-number">
+                    93
+                </div>
+
+                <div class="card-bottom">
+                    YEARS OF STORIES
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ============================= -->
+    <!-- INTRO MESSAGE -->
+    <!-- ============================= -->
+
+    <section class="section dark-section">
+
+        <div class="section-title">
+
+            <div class="small-label">
+                FILE 01
+            </div>
+
+            <h2>
+                BEFORE THE<br>
+                BIRTHDAY
+            </h2>
+
+        </div>
+
+        <div class="story-box">
+
+            <p>
+                Before we get to all the birthday greetings,
+                we wanted to remember the moments surrounding
+                this celebration.
+            </p>
+
+            <p>
+                The food, the family, the laughter,
+                the calls, the dancing and all the little
+                moments that made this celebration special.
+            </p>
+
+            <button
+                class="retro-button"
+                onclick="showSecretMessage()">
+                OPEN HIDDEN FILE
+            </button>
+
+        </div>
+
+        <div id="secretMessage" class="secret-box hidden">
+
+            <div class="small-label">
+                CLASSIFIED FAMILY FILE
+            </div>
+
+            <h3>
+                THE REAL SECRET
+            </h3>
+
+            <p>
+                You may have thought this was just another
+                birthday website.
+            </p>
+
+            <p>
+                But the real gift is not the website.
+                It is everyone who took the time to be part
+                of this memory.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- ============================= -->
+    <!-- CELEBRATION -->
+    <!-- ============================= -->
+
+    <section id="celebration" class="section celebration-section">
+
+        <div class="section-title center">
+
+            <div class="small-label">
+                FILE 02
+            </div>
+
+            <h2>
+                THE<br>
+                CELEBRATION
+            </h2>
+
+            <p>
+                A few moments from the celebration.
+            </p>
+
+        </div>
+
+
+        <!-- FOOD VIDEO -->
+
+        <div class="feature-video-card">
+
+            <div class="video-label">
+                CELEBRATION VIDEO 01
+            </div>
+
+            <h3>
+                BIRTHDAY FOOD
+            </h3>
+
+            <p>
+                Good food, family and a reason to celebrate.
+            </p>
+
+            <button
+                class="retro-button"
+                onclick="openVideo('birthday-food')">
+                WATCH VIDEO
+            </button>
+
+        </div>
+
+
+        <!-- THREE PHOTOS -->
+
+        <div class="photo-grid">
+
+            <div class="photo-card">
+
+                <img
+                    src="images/photo1.jpg"
+                    alt="Family celebration"
+                    onerror="this.style.display='none';">
+
+                <div class="photo-placeholder">
+                    PHOTO 01
+                </div>
+
+            </div>
+
+
+            <div class="photo-card">
+
+                <img
+                    src="images/photo2.jpg"
+                    alt="Family together"
+                    onerror="this.style.display='none';">
+
+                <div class="photo-placeholder">
+                    PHOTO 02
+                </div>
+
+            </div>
+
+
+            <div class="photo-card">
+
+                <img
+                    src="images/photo3.jpg"
+                    alt="Family memory"
+                    onerror="this.style.display='none';">
+
+                <div class="photo-placeholder">
+                    PHOTO 03
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- MORE CELEBRATION VIDEOS -->
+
+        <div class="video-grid">
+
+            <div class="video-card">
+
+                <div class="video-number">
+                    02
+                </div>
+
+                <h3>
+                    EVERYONE DANCING
+                </h3>
+
+                <p>
+                    When the family celebration turns into a dance floor.
+                </p>
+
+                <button
+                    class="retro-button small-button"
+                    onclick="openVideo('everyone-dancing')">
+                    PLAY
+                </button>
+
+            </div>
+
+
+            <div class="video-card">
+
+                <div class="video-number">
+                    03
+                </div>
+
+                <h3>
+                    BEFORE THE BIRTHDAY
+                </h3>
+
+                <p>
+                    A celebration before the actual birthday.
+                </p>
+
+                <button
+                    class="retro-button small-button"
+                    onclick="openVideo('before-birthday-celebration')">
+                    PLAY
+                </button>
+
+            </div>
+
+
+            <div class="video-card">
+
+                <div class="video-number">
+                    04
+                </div>
+
+                <h3>
+                    AFTER EATING
+                </h3>
+
+                <p>
+                    Everyone calling Uncle after finishing the food.
+                </p>
+
+                <button
+                    class="retro-button small-button"
+                    onclick="openVideo('calling-uncle-after-eating-1')">
+                    PLAY
+                </button>
+
+            </div>
+
+
+            <div class="video-card">
+
+                <div class="video-number">
+                    05
+                </div>
+
+                <h3>
+                    THE CALL CONTINUES
+                </h3>
+
+                <p>
+                    Part two of the family call.
+                </p>
+
+                <button
+                    class="retro-button small-button"
+                    onclick="openVideo('calling-uncle-after-eating-2')">
+                    PLAY
+                </button>
+
+            </div>
+
+
+            <div class="video-card special-card">
+
+                <div class="video-number">
+                    06
+                </div>
+
+                <h3>
+                    UNCLE'S GREEN LIGHT
+                </h3>
+
+                <p>
+                    Sometimes the best family memories
+                    start with someone saying,
+                    "Go ahead."
+                </p>
+
+                <button
+                    class="retro-button small-button"
+                    onclick="openVideo('cousins-green-light')">
+                    PLAY
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ============================= -->
+    <!-- FAMILY GREETINGS INTRO -->
+    <!-- ============================= -->
+
+    <section id="greetings" class="section greetings-intro">
+
+        <div class="center">
+
+            <div class="small-label">
+                FILE 03
+            </div>
+
+            <h2>
+                THE WHOLE<br>
+                FAMILY HAS<br>
+                SOMETHING TO SAY
+            </h2>
+
+            <p>
+                We asked everyone to record a little message
+                for your 93rd birthday.
+            </p>
+
+            <p>
+                Some prepared messages.
+                Some sang.
+                Some danced.
+                Some simply wanted to say happy birthday.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- ============================= -->
+    <!-- FAMILY VIDEOS -->
+    <!-- ============================= -->
+
+    <section class="section family-section">
+
+        <div class="section-title center">
+
+            <div class="small-label">
+                FAMILY ARCHIVE
+            </div>
+
+            <h2>
+                19 MESSAGES
+            </h2>
+
+            <p>
+                Click a family member to open their video.
+            </p>
+
+        </div>
+
+
+        <div class="family-grid">
+
+
+            <!-- 01 -->
+
+            <div class="family-card">
+
+                <div class="family-index">
+                    01
+                </div>
+
+                <h3>
+                    LYLIE
+                </h3>
+
+                <p>
+                    A little birthday greeting from Lylie.
+                </p>
+
+                <button
+                    onclick="openVideo('lylie')"
+                    class="retro-button small-button">
+                    OPEN MESSAGE
+                </button>
+
+            </div>
+
+
+            <!-- 02 -->
+
+            <div class="family-card">
+
+                <div class="family-index">
+                    02
+                </div>
+
+                <h3>
+                    AKEISHA & JENNY'S SON
+                </h3>
+
+                <p>
+                    Singing Happy Birthday for Uncle.
+                </p>
+
+                <button
+                    onclick="openVideo('akeisha-jenny-son')"
+                    class="retro-button small-button">
+                    OPEN MESSAGE
+                </button>
+
+            </div>
+
+
+            <!-- 03 -->
+
+            <div class="family-card">
+
+                <div class="family-index">
+                    03
+                </div>
+
+                <h3>
+                    ETHAN
+                </h3>
+
+                <p>
+                    A birthday greeting from Ethan.
+                </p>
+
+                <button
+                    onclick="openVideo('ethan')"
+                    class="retro-button small-button">
+                    OPEN MESSAGE
+                </button>
+
+            </div>
+
+
+            <!-- 04 -->
+
+            <div class="family-card">
+
+                <div class="family-index">
+                    04
+                </div>
+
+                <h3>
+                    PAU, ASHLEY & CAMILLE
+                </h3>
+
+                <p>
+                    A greeting filled with laughter.
+                </p>
+
+                <button
+                    onclick="openVideo('pau-ashley-camille')"
+                    class="retro-button small-button">
+                    OPEN MESSAGE
+                </button>
+
+            </div>
+
+
+            <!-- 05 -->
+
+            <div class="family-card">
+
+                <div class="family-index">
+                    05
+                </div>
+
+                <h3>
+                    METSENG & TONY
+                </h3>
+
+                <p>
+                    A birthday greeting from the family.
+                </p>
+
+                <button
+                    onclick="openVideo('metseng-tony')"
+                    class="retro-button small-button">
+                    OPEN MESSAGE
+                </button>
+
+            </div>
+
+
+            <!-- 06 -->
+
+            <div class="family-card">
+
+                <div class="family-index">
+                    06
+                </div>
+
+                <h3>
+                    PAULLENE
+                </h3>
+
+                <p>
+                    A birthday message from Paullene.
+                </p>
+
+                <button
+                    onclick="openVideo('paullene')"
+                    class="retro-button small-button">
+                    OPEN MESSAGE
+                </button>
+
+            </div>
+
+
+            <!-- 07 -->
+
+            <div class="family-card">
+
+                <div class="family-index">
+                    07
+                </div>
+
+                <h3>
+                    RAQUEL
+                </h3>
+
+                <p>
+                    A birthday greeting from Raquel.
+                </p>
+
+                <button
+                    onclick="openVideo('raquel')"
+                    class="retro-button small-button">
+                    OPEN MESSAGE
+                </button>
+
+            </div>
+
+
+            <!-- 08 -->
+
+            <div class="family-card">
+
+                <div class="family-index">
+                    08
+                </div>
+
+                <h3>
+                    JANET
+                </h3>
+
+                <p>
+                    A birthday message from Janet.
+                </p>
+
+                <button
+                    onclick="openVideo('janet')"
+                    class="retro-button small-button">
+                    OPEN MESSAGE
+                </button>
+
+            </div>
+
+
+            <!-- 09 -->
+
+            <div class="family-card">
+
+                <div class="family-index">
+                    09
+                </div>
+
+                <h3>
+                    JENNY
+                </h3>
+
+                <p>
+                    A birthday greeting from Jenny.
+                </p>
+
+                <button
+                    onclick="openVideo('jenny')"
+                    class="retro-button small-button">
+                    OPEN MESSAGE
+                </button>
+
+            </div>
+
+
+            <!-- 10 -->
+
+            <div class="family-card">
+
+                <div class="family-index">
+                    10
+                </div>
+
+                <h3>
+                    JESYL
+                </h3>
+
+                <p>
+                    A birthday message from Jesyl.
+                </p>
+
+                <button
+                    onclick="openVideo('jesyl')"
+                    class="retro-button small-button">
+                    OPEN MESSAGE
+                </button>
+
+            </div>
+
+
+            <!-- 11 -->
+
+            <div class="family-card">
+
+                <div class="family-index">
+                    11
+                </div>
+
+                <h3>
+                    DIANNE
+                </h3>
+
+                <p>
+                    A birthday greeting from Dianne.
+                </p>
+
+                <button
+                    onclick="openVideo('dianne')"
+                    class="retro-button small-button">
+                    OPEN MESSAGE
+                </button>
+
+            </div>
+
+
+            <!-- 12 -->
+
+            <div class="family-card">
+
+                <div class="family-index">
+                    12
+                </div>
+
+                <h3>
+                    GRACE, CAMILLE & PUTI
+                </h3>
+
+                <p>
+                    A family birthday greeting.
+                </p>
+
+                <button
+                    onclick="openVideo('grace-camille-puti')"
+                    class="retro-button small-button">
+                    OPEN MESSAGE
+                </button>
+
+            </div>
+
+
+            <!-- 13 -->
+
+            <div class="family-card">
+
+                <div class="family-index">
+                    13
+                </div>
+
+                <h3>
+                    DINAND
+                </h3>
+
+                <p>
+                    A birthday greeting from Dinand.
+                </p>
+
+                <button
+                    onclick="openVideo('dinand')"
+                    class="retro-button small-button">
+                    OPEN MESSAGE
+                </button>
+
+            </div>
+
+
+            <!-- 14 -->
+
+            <div class="family-card">
+
+                <div class="family-index">
+                    14
+                </div>
+
+                <h3>
+                    GLENDA
+                </h3>
+
+                <p>
+                    A birthday message from Glenda.
+                </p>
+
+                <button
+                    onclick="openVideo('glenda')"
+                    class="retro-button small-button">
+                    OPEN MESSAGE
+                </button>
+
+            </div>
+
+
+            <!-- 15 -->
+
+            <div class="family-card">
+
+                <div class="family-index">
+                    15
+                </div>
+
+                <h3>
+                    AKEISHA
+                </h3>
+
+                <p>
+                    A special birthday dance for Uncle.
+                </p>
+
+                <button
+                    onclick="openVideo('akeisha-dance')"
+                    class="retro-button small-button">
+                    OPEN MESSAGE
+                </button>
+
+            </div>
+
+
+            <!-- 16 -->
+
+            <div class="family-card">
+
+                <div class="family-index">
+                    16
+                </div>
+
+                <h3>
+                    VILMA & SANTY
+                </h3>
+
+                <p>
+                    A birthday greeting from Vilma and Santy.
+                </p>
+
+                <button
+                    onclick="openVideo('vilma-santy')"
+                    class="retro-button small-button">
+                    OPEN MESSAGE
+                </button>
+
+            </div>
+
+
+            <!-- 17 -->
+
+            <div class="family-card">
+
+                <div class="family-index">
+                    17
+                </div>
+
+                <h3>
+                    NICA
+                </h3>
+
+                <p>
+                    A birthday message from Nica.
+                </p>
+
+                <button
+                    onclick="openVideo('nica')"
+                    class="retro-button small-button">
+                    OPEN MESSAGE
+                </button>
+
+            </div>
+
+
+            <!-- 18 -->
+
+            <div class="family-card">
+
+                <div class="family-index">
+                    18
+                </div>
+
+                <h3>
+                    AJ
+                </h3>
+
+                <p>
+                    A birthday greeting from AJ.
+                </p>
+
+                <button
+                    onclick="openVideo('aj')"
+                    class="retro-button small-button">
+                    OPEN MESSAGE
+                </button>
+
+            </div>
+
+
+            <!-- 19 -->
+
+            <div class="family-card">
+
+                <div class="family-index">
+                    19
+                </div>
+
+                <h3>
+                    PAULDHESS, WIFE & SON
+                </h3>
+
+                <p>
+                    A birthday greeting from the family.
+                </p>
+
+                <button
+                    onclick="openVideo('pauldhess-wife-son')"
+                    class="retro-button small-button">
+                    OPEN MESSAGE
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ============================= -->
+    <!-- FAMILY MESSAGE -->
+    <!-- ============================= -->
+
+    <section id="finalMessage" class="section final-section">
+
+        <div class="final-box">
+
+            <div class="small-label">
+                FINAL FAMILY FILE
+            </div>
+
+            <h2>
+                FROM ALL OF US
+            </h2>
+
+            <p>
+                Happy 93rd Birthday, Uncle.
+            </p>
+
+            <p>
+                Thank you for the love, support, stories,
+                laughter and memories you have given our family.
+            </p>
+
+            <p>
+                Today is not only about celebrating 93 years.
+                It is about celebrating the people,
+                memories and family that came along the way.
+            </p>
+
+            <div class="signature">
+                YOUR FAMILY
+            </div>
+
+            <button
+                onclick="unlockFinalSurprise()"
+                class="retro-button big-button">
+                ONE LAST SURPRISE
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- ============================= -->
+    <!-- LAST SURPRISE -->
+    <!-- ============================= -->
+
+    <section id="lastSurprise" class="last-surprise hidden">
+
+        <div class="surprise-box">
+
+            <div class="small-label">
+                FINAL FILE UNLOCKED
+            </div>
+
+            <h2>
+                ONE LAST THING
+            </h2>
+
+            <p>
+                You have watched the messages.
+                You have seen the memories.
+                But there is one more little surprise.
+            </p>
+
+            <div class="quote-box">
+
+                <p>
+                    "A family is not just made of years.
+                    It is made of moments."
+                </p>
+
+            </div>
+
+            <p>
+                And this birthday became another moment
+                we will remember.
+            </p>
+
+            <button
+                onclick="openPersonalGift()"
+                class="retro-button big-button">
+                OPEN YOUR PERSONAL SURPRISE
+            </button>
+
+            <button
+                onclick="closeSurprise()"
+                class="close-button">
+                CLOSE THE SURPRISE
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- ============================= -->
+    <!-- FOOTER -->
+    <!-- ============================= -->
+
+    <footer>
+
+        <div class="footer-line"></div>
+
+        <p>
+            FAMILY ARCHIVE — 2026
+        </p>
+
+        <p>
+            MADE WITH LOVE BY YOUR NIECE
+        </p>
+
+    </footer>
+
+</main>
+
+
+<!-- ============================= -->
+<!-- VIDEO MODAL -->
+<!-- ============================= -->
+
+<div id="videoModal" class="video-modal hidden">
+
+    <div class="video-modal-box">
+
+        <button
+            class="modal-close"
+            onclick="closeVideo()">
+            CLOSE
+        </button>
+
+        <div class="small-label">
+            FAMILY VIDEO
+        </div>
+
+        <h2 id="modalTitle">
+            Family Message
+        </h2>
+
+        <p id="modalDescription">
+            Birthday message.
+        </p>
+
+        <video
+            id="modalVideo"
+            controls
+            playsinline>
+        </video>
+
+    </div>
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
